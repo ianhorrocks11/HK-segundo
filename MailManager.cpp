@@ -14,6 +14,7 @@ MailManager::MailManager() {
 
 void MailManager::addMail(email m) {
 
+
 }
 
 /*
