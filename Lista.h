@@ -1,7 +1,12 @@
 #ifndef LISTA_H
 #define LISTA_H
 
+
 #include "nodo.h"
+#include <string>
+
+using namespace std;
+
 /**
  * Clase que implementa una Lista Enlasada generica, ya que puede
  * almacenar cualquier tipo de dato T
@@ -11,7 +16,7 @@
 template<class T>
 class Lista {
 private:
-    nodo<T> *inicio;
+    nodo *inicio;
 
 public:
     Lista();
@@ -24,7 +29,7 @@ public:
 
     int getTamanio();
 
-    void insertar(int pos, T dato);
+    void insertar(int pos, unsigned int ID, string de, string para, string fecha, string contenido, string asunto, T dato);
 
     void insertarPrimero(T dato);
 
@@ -38,7 +43,7 @@ public:
 
     void vaciar();
 
-    nodo<T> *getInicio(){return inicio;}
+    nodo *getInicio(){return inicio;}
 };
 
 
@@ -115,12 +120,12 @@ int Lista<T>::getTamanio() {
  * @param dato  dato a insertar
  */
 template<class T>
-void Lista<T>::insertar(int pos, T dato) {
+void Lista::insertar(int pos, unsigned int ID, string de, string para, string fecha, string contenido, string asunto, T dato) {
     int cont = 0;
-    nodo<T> *aux=inicio;
+    nodo *aux=inicio;
 
     if (pos==0){
-        nodo<T> *nn = new nodo<T>(dato, inicio);
+        nodo *nn = new nodo (ID, para, fecha, asunto, contenido, dato, inicio);
         inicio = nn;
         return;
     }
@@ -132,7 +137,7 @@ void Lista<T>::insertar(int pos, T dato) {
     if (aux == NULL )
         throw 1;
 
-    nodo<T> *nn = new nodo<T>(dato, aux ->getNext());
+    nodo *nn = new nodo (ID, para, fecha, asunto, contenido, dato, inicio, dato, aux->getNext());
     aux->setNext(nn);
 }
 

@@ -9,11 +9,8 @@ using namespace std;
 template <class T>
 class nodo{
 private:
+    unsigned int id;
     string from;
-public:
-
-
-private:
     string to;
     string date;
     string subject;
@@ -21,6 +18,27 @@ private:
     T dato;
     nodo *next;
 public:
+    nodo (unsigned int ID, string de, string para, string fecha, string asunto, string contenido, T d, nodo* n){
+        dato = d;
+        next = n;
+        id = ID;
+        from = de;
+        to = para;
+        date = fecha;
+        subject = asunto;
+        content = contenido;
+    }
+
+    nodo(){
+        next=NULL;
+        id = NULL;
+        from = NULL;
+        to = NULL;
+        date = NULL;
+        subject = NULL;
+        content = NULL
+    }
+
     void setNext(nodo *next) {
         nodo::next = next;
     }
@@ -33,13 +51,7 @@ public:
     nodo *getNext() const {
         return next;
     }
-    nodo(){
-        next=NULL;
-    }
-    nodo (T d, nodo* n){
-        dato = d;
-        next = n;
-    }
+
     const string &getFrom() const {
         return from;
     }

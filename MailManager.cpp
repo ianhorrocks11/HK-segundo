@@ -14,9 +14,6 @@ MailManager::MailManager() {
 
 void MailManager::addMail(email m) {
 
-    if(m.id == 1){
-
-    }
 
 }
 
