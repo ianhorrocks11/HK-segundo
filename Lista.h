@@ -37,6 +37,7 @@ public:
     void reemplazar(int pos, T dato);
 
     void vaciar();
+
     nodo<T> *getInicio(){return inicio;}
 };
 

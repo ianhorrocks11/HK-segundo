@@ -10,19 +10,18 @@
 
 class MailManager {
 private:
-    
+
 public:
     MailManager();
-    
+
     void addMail(email m);
-    
+
     void deleteMail(unsigned int id);
-    
+
     vector<email> getsortedbyDate();
-    
-    vector<email> getsortedbyDate ();
-    
-    
+
+    vector<email> getsortedbyDate (string desde, string hasta);
+
 
 };
 

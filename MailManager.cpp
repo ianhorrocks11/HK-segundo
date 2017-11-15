@@ -14,6 +14,9 @@ MailManager::MailManager() {
 
 void MailManager::addMail(email m) {
 
+    if(m.id == 1){
+
+    }
 
 }
 
@@ -33,4 +36,10 @@ vector<email> MailManager::getsortedbyDate() {
 
 }
 
+/*
+ * Buscar mails entre fechas
+ */
 
+vector<email> MailManager::getsortedbyDate(string desde, string hasta) {
+
+}
