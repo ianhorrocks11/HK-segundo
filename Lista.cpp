@@ -48,6 +48,7 @@ Lista::~Lista() {
 
 void Lista::insertar(email m) {
     insertarDate(m, id);
+    insertarFrom(m, id);
     id ++;
 
 }
@@ -57,8 +58,8 @@ void Lista::insertarDate(email m, unsigned long int id) {
 
 
     if (inicio == NULL) {
-        nodo *nn = new nodo(inicio, m, id);
-        inicio = nn;
+       //todo  nodo *nn = new nodo(inicio, m, id);
+        inicio =  new nodo(inicio, m, id);
         return;
     }
 
@@ -76,8 +77,8 @@ void Lista::insertarDate(email m, unsigned long int id) {
         if (aux == NULL)
             throw 1;
 
-        nodo *nn = new nodo(aux->getNext(), m, id);
-        aux->setNext(nn);
+        //todo nodo *nn = new nodo(aux->getNext(), m, id);
+        aux->setNext(new nodo(aux->getNext(), m, id));
 
 
     }
