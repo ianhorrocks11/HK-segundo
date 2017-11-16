@@ -5,22 +5,24 @@
 #include <string>
 #include "email.h"
 
+
 using namespace std;
 
 
 class nodo{
 private:
-    email mail;
     nodo *next;
+    email ma;
 public:
-    nodo(const email &mail, nodo *next) : mail(mail), next(next) {}
+    nodo(nodo *next, const email &ma) : next(next), ma(ma) {}
 
-    const email &getMail() const {
-        return mail;
+
+    const email &getMa() const {
+        return ma;
     }
 
-    void setMail(const email &mail) {
-        nodo::mail = mail;
+    void setMa(const email &ma) {
+        nodo::ma = ma;
     }
 
     nodo *getNext() const {
@@ -32,6 +34,7 @@ public:
     }
 
 };
+
 
 
 

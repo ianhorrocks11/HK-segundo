@@ -13,7 +13,6 @@ using namespace std;
  * @tparam T cualquier tipo de dato
  */
 
-
 class Lista {
 private:
     nodo *inicio;
@@ -30,6 +29,8 @@ public:
     int getTamanio();
 
     void insertar(email m);
+
+    void insertarFrom(email m);
 
     void remover(unsigned int id);
 
@@ -123,20 +124,20 @@ void Lista::insertar(email m) {
     nodo *sig = inicio;
 
     if (m.id==1){
-        nodo *nn = new nodo(m, inicio);
+        nodo *nn = new nodo( inicio, m);
         inicio = nn;
         return;
     }else {
 
-        while (aux != NULL) {
+        while (aux != nullptr) {
 
             aux = aux->getNext();
 
-            while (sig != NULL) {
+            while (sig != nullptr) {
 
-                if (m.date > sig->getMail().date) {
+                if (m.date > sig->getMa().date) {
 
-                    nodo *nn = new nodo(m, aux->getNext());
+                    nodo *nn = new nodo(aux->getNext(), m);
                     aux->setNext(nn);
                 }
 
@@ -148,6 +149,33 @@ void Lista::insertar(email m) {
     }
 
 }
+
+
+void Lista::insertarFrom(email m) {
+    nodo *aux = inicio;
+    nodo *sig = inicio;
+
+        while (aux != nullptr) {
+
+            aux = aux->getNext();
+
+            while (sig != nullptr) {
+
+                if (m.from > sig->getMa().from) {
+
+                    nodo *nn = new nodo(aux->getNext(), m);
+                    aux->setNext(nn);
+                }
+
+                sig = sig->getNext();
+            }
+
+            aux = aux->getNext();
+        }
+    }
+
+
+
 
 /**
  * Elimina el nodo en la posicion 'pos' de la lista enlasada
@@ -171,11 +199,11 @@ void Lista::remover(unsigned int id) {
         return;
     }
 
-    while (count < pos-1 && aux->getNext() != NULL){
+    while (count < pos-1 && aux->getNext() != nullptr){
         count++;
         aux=aux -> getNext();
     }
-    if (aux->getNext() == NULL )
+    if (aux->getNext() == nullptr )
         throw 1;
 
     nodo *tmp = aux->getNext();
@@ -191,17 +219,17 @@ void Lista::remover(unsigned int id) {
  */
 
 void Lista::reemplazar(int pos, email m) {
-    unsigned i=0;
+    unsigned int i=0;
     nodo *aux = inicio;
 
-    while (i < pos && aux != NULL){
+    while (i < pos && aux != nullptr){
         aux = aux->getNext();
         i++;
     }
-    if(aux == NULL)
+    if(aux == nullptr)
         throw 3;
 
-    aux->setMail(m);
+    aux->setNext(aux->getNext());
 }
 
 
@@ -216,28 +244,28 @@ void Lista::vaciar() {}
 int Lista::getpos(unsigned int id) {
     nodo *aux = inicio;
     int pos = 0;
-    while (aux != NULL){
+    while (aux != nullptr){
         pos ++;
-        if (id == aux->getMail().id)
+        if (id == aux->getMa().id)
             return pos;
         aux = aux->getNext();
     }
 
-    if (NULL == aux)
+    if (aux == nullptr)
         throw 404;
 }
 
 void Lista::mostrarlista() {
-    nodo*aux = inicio;
+    nodo *aux = inicio;
 
     while (aux != NULL){
         cout <<"---------------------------" <<endl;
-        cout << aux->getMail().id << endl;
-        cout << aux->getMail().from << endl;
-        cout << aux->getMail().to << endl;
-        cout << aux->getMail().date << endl;
-        cout << aux->getMail().subject << endl;
-        cout << aux->getMail().content << endl;
+        cout << aux->getMa().id << endl;
+        cout << aux->getMa().from << endl;
+        cout << aux->getMa().to << endl;
+        cout << aux->getMa().date << endl;
+        cout << aux->getMa().subject << endl;
+        cout << aux->getMa().content << endl;
         cout <<"-------------------------"<<endl;
         aux = aux->getNext();
     }
