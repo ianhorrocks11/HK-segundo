@@ -35,7 +35,7 @@ vector<email> MailManager::getsortedbyDate() {
 
     while(aux != NULL) {
         ret.push_back(aux->getMa());
-        aux->getNext();
+        aux = aux->getNext();
     }
    return ret;
 }
