@@ -34,9 +34,15 @@ void MailManager::deleteMail(unsigned int id) {
  */
 
 vector<email> MailManager::getsortedbyDate() {
-    
+
     vector<email> ret;
-    ret.push_back()
+    nodo *aux = mails.getInicio();
+
+    while(aux != NULL)
+    ret.push_back(aux->getMail());
+    aux->getNext();
+
+    return ret;
 }
 
 /*
