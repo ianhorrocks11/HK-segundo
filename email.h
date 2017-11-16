@@ -13,7 +13,12 @@ public:
     string date;
     string subject;
     string content;
+
+    email(unsigned long id, const string &from, const string &to, const string &date, const string &subject,
+          const string &content) : id(id), from(from), to(to), date(date), subject(subject), content(content) {}
+
 };
+
 
 
 

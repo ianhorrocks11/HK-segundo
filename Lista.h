@@ -13,7 +13,7 @@ using namespace std;
  * @tparam T cualquier tipo de dato
  */
 
-template<class T>
+
 class Lista {
 private:
     nodo *inicio;
@@ -21,7 +21,7 @@ private:
 public:
     Lista();
 
-    Lista(const Lista<T> &li);
+    Lista(const Lista &li);
 
     ~Lista();
 
@@ -29,21 +29,19 @@ public:
 
     int getTamanio();
 
-    void insertar(int pos, unsigned int ID, string de, string para, string fecha, string contenido, string asunto, T dato);
+    void insertar(email m);
 
-    void insertarPrimero(T dato);
+    void remover(unsigned int id);
 
-    void insertarUltimo(T dato);
-
-    void remover(int pos);
-
-    T getDato(int pos);
-
-    void reemplazar(int pos, T dato);
+    void reemplazar(int pos, email m);
 
     void vaciar();
 
     nodo *getInicio(){return inicio;}
+
+    int getpos(unsigned int id);
+
+    void mostrarlista();
 };
 
 
@@ -51,8 +49,8 @@ public:
  * Constructor de la clase Lista
  * @tparam T
  */
-template<class T>
-Lista<T>::Lista() {
+
+Lista::Lista() {
     inicio = NULL;
 }
 
@@ -62,8 +60,8 @@ Lista<T>::Lista() {
  * @tparam T
  * @param li
  */
-template<class T>
-Lista<T>::Lista(const Lista<T> &li) {}
+
+Lista::Lista(const Lista &li) {}
 
 
 /**
@@ -71,10 +69,10 @@ Lista<T>::Lista(const Lista<T> &li) {}
  * utilizados en la lista
  * @tparam T
  */
-template<class T>
-Lista<T>::~Lista() {
-    nodo<T> *aux = inicio;
-    nodo<T> *ant = inicio;
+
+Lista::~Lista() {
+    nodo *aux = inicio;
+    nodo *ant = inicio;
 
     while (aux != NULL) {
         ant = aux;
@@ -90,8 +88,8 @@ Lista<T>::~Lista() {
  * @tparam T
  * @return true si la lista esta vacia, sino false
  */
-template <class T>
-bool Lista<T>::esVacia() {
+
+bool Lista::esVacia() {
     return inicio == NULL;
 }
 
@@ -101,9 +99,9 @@ bool Lista<T>::esVacia() {
  * @tparam T
  * @return la cantidad de nodos de la lista
  */
-template<class T>
-int Lista<T>::getTamanio() {
-    nodo<T> *aux = inicio;
+
+int Lista::getTamanio() {
+    nodo *aux = inicio;
     int count=0;
     while(aux!=NULL){
         count++;
@@ -119,68 +117,50 @@ int Lista<T>::getTamanio() {
  * @param pos lugar donde será insertado el dato
  * @param dato  dato a insertar
  */
-template<class T>
-void Lista::insertar(int pos, unsigned int ID, string de, string para, string fecha, string contenido, string asunto, T dato) {
-    int cont = 0;
-    nodo *aux=inicio;
 
-    if (pos==0){
-        nodo *nn = new nodo (ID, para, fecha, asunto, contenido, dato, inicio);
+void Lista::insertar(email m) {
+    nodo *aux = inicio;
+    nodo *sig = inicio;
+
+    if (m.id==1){
+        nodo *nn = new nodo(m, inicio);
         inicio = nn;
         return;
+    }else {
+
+        while (aux != NULL) {
+
+            aux = aux->getNext();
+
+            while (sig != NULL) {
+
+                if (m.date > sig->getMail().date) {
+
+                    nodo *nn = new nodo(m, aux->getNext());
+                    aux->setNext(nn);
+                }
+
+                sig = sig->getNext();
+            }
+
+            aux = aux->getNext();
+        }
     }
 
-    while(cont < pos-1 && aux != NULL){
-        cont++;
-        aux = aux->getNext();
-    }
-    if (aux == NULL )
-        throw 1;
-
-    nodo *nn = new nodo (ID, para, fecha, asunto, contenido, dato, inicio, dato, aux->getNext());
-    aux->setNext(nn);
 }
-
-
-/**
- * Inserta un nodo con el dato en la primera posicion
- * @tparam T
- * @param dato dato a insertar
- */
-template<class T>
-void Lista<T>::insertarPrimero(T dato) {
-    nodo <T> *nm = new nodo<T>(dato, inicio);
-
-}
-
-
-/**
- * Inserta un nodo con el dato en la ultima posicion
- * @tparam T
- * @param dato dato a insertar
- */
-template<class T>
-void Lista<T>::insertarUltimo(T dato) {
-    nodo<T> *aux=inicio;
-    int count=0;
-    while (aux!=NULL){
-        count++;
-        aux = aux->getNext();
-    }
-    Lista<T>::insertar(count, dato);
-
-}
-
 
 /**
  * Elimina el nodo en la posicion 'pos' de la lista enlasada
  * @tparam T
  * @param pos posicion del nodo a eliminar
  */
-template<class T>
-void Lista<T>::remover(int pos) {
-    nodo<T> *aux = inicio;
+
+
+void Lista::remover(unsigned int id) {
+    nodo *aux = inicio;
     int count=0;
+
+    int pos = getpos(id);
 
     if (pos == 0){
         if (inicio==NULL)
@@ -198,33 +178,10 @@ void Lista<T>::remover(int pos) {
     if (aux->getNext() == NULL )
         throw 1;
 
-    nodo<T> *tmp = aux->getNext();
+    nodo *tmp = aux->getNext();
     aux->setNext(aux->getNext()->getNext());
     delete tmp;
 }
-
-
-/**
- * Obtener el dato del nodo en la posicion pos
- * @tparam T
- * @param pos posicion del dato
- * @return dato almacenado en el nodo
- */
-template<class T>
-T Lista<T>::getDato(int pos) {
-    unsigned i=0;
-    nodo<T> *aux = inicio;
-
-    while (i < pos && aux != NULL){
-        aux = aux->getNext();
-        i++;
-    }
-    if(aux == NULL)
-        throw 3;
-
-    return aux->getDato();
-}
-
 
 /**
  * Reemplaza el dato almacenado en un nodo por este otro
@@ -232,10 +189,10 @@ T Lista<T>::getDato(int pos) {
  * @param pos posicion donde se desea reemplazar
  * @param dato nuevo dato a almacenar
  */
-template<class T>
-void Lista<T>::reemplazar(int pos, T dato) {
+
+void Lista::reemplazar(int pos, email m) {
     unsigned i=0;
-    nodo<T> *aux = inicio;
+    nodo *aux = inicio;
 
     while (i < pos && aux != NULL){
         aux = aux->getNext();
@@ -244,7 +201,7 @@ void Lista<T>::reemplazar(int pos, T dato) {
     if(aux == NULL)
         throw 3;
 
-    aux->setDato(dato);
+    aux->setMail(m);
 }
 
 
@@ -252,8 +209,40 @@ void Lista<T>::reemplazar(int pos, T dato) {
  * Función que vacia la lista enlazada
  * @tparam T
  */
-template<class T>
-void Lista<T>::vaciar() {}
+
+void Lista::vaciar() {}
+
+
+int Lista::getpos(unsigned int id) {
+    nodo *aux = inicio;
+    int pos = 0;
+    while (aux != NULL){
+        pos ++;
+        if (id == aux->getMail().id)
+            return pos;
+        aux = aux->getNext();
+    }
+
+    if (NULL == aux)
+        throw 404;
+}
+
+void Lista::mostrarlista() {
+    nodo*aux = inicio;
+
+    while (aux != NULL){
+        cout <<"---------------------------" <<endl;
+        cout << aux->getMail().id << endl;
+        cout << aux->getMail().from << endl;
+        cout << aux->getMail().to << endl;
+        cout << aux->getMail().date << endl;
+        cout << aux->getMail().subject << endl;
+        cout << aux->getMail().content << endl;
+        cout <<"-------------------------"<<endl;
+        aux = aux->getNext();
+    }
+}
+
 
 
 #endif //LISTA_H

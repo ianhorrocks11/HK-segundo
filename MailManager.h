@@ -10,7 +10,8 @@
 
 class MailManager {
 private:
-
+    Lista mails;
+    unsigned int contador;
 public:
     MailManager();
 

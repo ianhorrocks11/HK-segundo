@@ -5,7 +5,7 @@
  */
 
 MailManager::MailManager() {
-
+    contador = 0;
 }
 
 /*
@@ -13,6 +13,9 @@ MailManager::MailManager() {
  */
 
 void MailManager::addMail(email m) {
+
+    m.id = contador++;
+    mails.insertar(m);
 
 
 }
@@ -23,6 +26,7 @@ void MailManager::addMail(email m) {
 
 void MailManager::deleteMail(unsigned int id) {
 
+    mails.remover(id);
 }
 
 /*
@@ -30,7 +34,9 @@ void MailManager::deleteMail(unsigned int id) {
  */
 
 vector<email> MailManager::getsortedbyDate() {
-
+    
+    vector<email> ret;
+    ret.push_back()
 }
 
 /*
