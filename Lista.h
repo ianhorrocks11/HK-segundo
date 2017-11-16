@@ -24,9 +24,9 @@ public:
 
     ~Lista();
 
-    bool esVacia();
+    // bool esVacia();
 
-    int getTamanio();
+    // int getTamanio();
 
     void insertar(email m);
 
@@ -36,7 +36,7 @@ public:
 
     void reemplazar(int pos, email m);
 
-    void vaciar();
+    // void vaciar();
 
     nodo *getInicio(){return inicio;}
 
@@ -90,9 +90,9 @@ Lista::~Lista() {
  * @return true si la lista esta vacia, sino false
  */
 
-bool Lista::esVacia() {
-    return inicio == NULL;
-}
+// bool Lista::esVacia() {
+//    return inicio == NULL;
+//}
 
 
 /**
@@ -101,15 +101,15 @@ bool Lista::esVacia() {
  * @return la cantidad de nodos de la lista
  */
 
-int Lista::getTamanio() {
-    nodo *aux = inicio;
-    int count=0;
-    while(aux!=NULL){
-        count++;
-        aux = aux->getNext();
-    }
-    return count;
-}
+// int Lista::getTamanio() {
+//    nodo *aux = inicio;
+//    int count=0;
+//    while(aux!=NULL){
+//        count++;
+//        aux = aux->getNext();
+//    }
+//    return count;
+//}
 
 
 /**
@@ -238,7 +238,7 @@ void Lista::reemplazar(int pos, email m) {
  * @tparam T
  */
 
-void Lista::vaciar() {}
+// void Lista::vaciar() {}
 
 
 int Lista::getpos(unsigned int id) {
