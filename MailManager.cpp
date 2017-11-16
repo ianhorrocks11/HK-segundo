@@ -1,12 +1,10 @@
+
 #include "MailManager.h"
-
-
 /*
  * Constructor general
  */
 
 MailManager::MailManager() {
-    contador = 0;
 }
 
 /*
@@ -14,12 +12,7 @@ MailManager::MailManager() {
  */
 
 void MailManager::addMail(email m) {
-
-    m.id = contador ++;
     mails.insertar(m);
-    mailsFrom.insertarFrom(m);
-
-
 
 }
 
@@ -38,7 +31,7 @@ void MailManager::deleteMail(unsigned int id) {
 
 vector<email> MailManager::getsortedbyDate() {
     vector<email> ret;
-    nodo *aux = mails.getInicio();
+    nodo *aux = mails.getInicioD();
 
     while(aux != NULL) {
         ret.push_back(aux->getMa());
@@ -53,11 +46,11 @@ vector<email> MailManager::getsortedbyDate() {
 
 vector<email> MailManager::getsortedbyDate(string desde, string hasta) {
     vector<email> ret;
-    nodo *aux = mails.getInicio();
+    nodo *aux = mails.getInicioD();
 
     while(aux != NULL) {
 
-        if (aux->getMa().date > desde && aux->getMa().date < hasta)
+        if (aux->getMa().date >= desde && aux->getMa().date <= hasta)
             ret.push_back(aux->getMa());
 
         aux->getNext();
@@ -71,7 +64,7 @@ vector<email> MailManager::getsortedbyDate(string desde, string hasta) {
 
 vector<email> MailManager::getsortedbyFrom() {
     vector<email> ret;
-    nodo *aux = mailsFrom.getInicio();
+    nodo *aux = mails.getInicioF();
 
     while(aux != NULL) {
 
@@ -85,13 +78,13 @@ vector<email> MailManager::getsortedbyFrom() {
 /*
  * Buscar mail(s) de un remitente
  */
-vector<email> MailManager::getbyfrom(string from) {
+vector<email> MailManager::getbyfrom(string remitente) {
     vector<email> ret;
-    nodo *aux = mailsFrom.getInicio();
+    nodo *aux = mails.getInicioF();
 
     while(aux != NULL) {
 
-        if (aux->getMa().from == from)
+        if (aux->getMa().from == remitente)
             ret.push_back(aux->getMa());
 
         aux->getNext();

@@ -1,39 +1,32 @@
 #ifndef INC_02_LISTAS_NODO_H
 #define INC_02_LISTAS_NODO_H
 
-#include <iostream>
-#include <string>
 #include "email.h"
 
 
 using namespace std;
 
 
-class nodo{
+class nodo {
 private:
     nodo *next;
     email ma;
+
+
 public:
-    nodo(nodo *next, const email &ma) : next(next), ma(ma) {}
+    nodo();
 
+    nodo(nodo *ne, email mai, unsigned long int id);
 
-    const email &getMa() const {
-        return ma;
-    }
+    nodo *getNext() const;
 
-    void setMa(const email &ma) {
-        nodo::ma = ma;
-    }
+    void setNext(nodo *next);
 
-    nodo *getNext() const {
-        return next;
-    }
+    const email &getMa() const;
 
-    void setNext(nodo *next) {
-        nodo::next = next;
-    }
-
+    void setMa(const email &ma);
 };
+
 
 
 

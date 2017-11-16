@@ -1,5 +1,4 @@
 #include <vector>
-#include <string>
 #include "Lista.h"
 
 #ifndef SEGUNDOPARCIAL_HORROCKSKOBELT_MAILMANAGER_H
@@ -10,8 +9,7 @@
 class MailManager {
 private:
     Lista mails;
-    Lista mailsFrom;
-    unsigned int contador;
+
 public:
     MailManager();
 
